@@ -2,18 +2,18 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.Test;
 
-public class GoogleTest {
+public class GoogleTestWD extends DriverFactory {
 
 
 
-    private void googleExampleSearchFor(final String searchString) {
-       // System.setProperty("webdriver.chrome.driver", "C:\\Work\\Java\\seleniumTestNG\\src\\test\\resources\\chromedriver.exe");
-        final WebDriver driver = new ChromeDriver();
+    private void googleExampleSearchFor(final String searchString) throws Exception  {
+
+        WebDriver driver = DriverFactory.getDriver();
         driver.get("http://www.google.com");
 
         WebElement searchField = driver.findElement(By.name("q"));
@@ -29,17 +29,23 @@ public class GoogleTest {
         });
 
         System.out.println("Page title is: " + driver.getTitle());
-
-        driver.quit();
     }
 
     @Test
     public void googleCheeseExample () {
-        googleExampleSearchFor("Cheese!");
+        try {
+            googleExampleSearchFor("Cheese!");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Test
     public void googleBMWExample () {
-        googleExampleSearchFor("BMW");
+        try {
+            googleExampleSearchFor("BMW");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
